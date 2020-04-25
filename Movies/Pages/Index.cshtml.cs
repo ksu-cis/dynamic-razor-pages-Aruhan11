@@ -27,11 +27,20 @@ namespace Movies.Pages
             Movies = MovieDatabase.FilterByIMDBRating(Movies, IMDBMin, IMDBMax);            
         }
 
+        public void OnPost()
+        {
+            Movies = MovieDatabase.Search(SearchTerms);
+            Movies = MovieDatabase.FilterByMPAARating(Movies, MPAARatings);
+            Movies = MovieDatabase.FilterByGenre(Movies, Genres);
+            Movies = MovieDatabase.FilterByIMDBRating(Movies, IMDBMin, IMDBMax);
+
+        }
+
  
         /// <summary>
         /// The current search terms 
         /// </summary>
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public string SearchTerms { get; set; } = "";
 
         /// <summary>
@@ -43,20 +52,32 @@ namespace Movies.Pages
         /// <summary>
         /// The filtered genres
         /// </summary>
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public string[] Genres { get; set; }
 
         /// <summary>
         /// The minimum IMDB Rating
         /// </summary>
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public double? IMDBMin { get; set; }
 
         /// <summary>
         /// The maximum IMDB Rating
         /// </summary>
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public double? IMDBMax { get; set; }
+
+        /// <summary>
+        /// The minimum Rotten Tomatoes Rating
+        /// </summary>
+        [BindProperty(SupportsGet = true)]
+        public double? TomatoesMin { get; set; }
+
+        /// <summary>
+        /// The maximum Rotten Tomatoes Rating
+        /// </summary>
+        [BindProperty(SupportsGet = true)]
+        public double? TomatoesMax { get; set; }
 
     }
 }

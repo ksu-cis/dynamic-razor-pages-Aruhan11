@@ -4,7 +4,7 @@
     ViewData["Title"] = "Home page";
 }
 
-<form id="movie-database">
+<div id="movie-database">
 
     <div id="search">
         <input type="text" name="SearchTerms" value="@Model.SearchTerms" />
@@ -17,7 +17,7 @@
         @foreach (String rating in MovieDatabase.MPAARatings)
         {
             <label>
-                <input type="checkbox" name="MPAARatings" value="@rating" checked="@Model.MPAARatings.Contains(rating)" />
+                <input type="checkbox" name="MPAARatings" value="@rating" checked="@Model.MPAARatings?.Contains(rating)" />
                 @rating
             </label>
         }
@@ -26,7 +26,7 @@
         @foreach (String genre in MovieDatabase.Genres)
         {
             <label>
-                <input type="checkbox" name="Genres" value="@genre" />
+                <input type="checkbox" name="Genres" value="@genre" checked="@Model.Genres?.Contains(genre)" />
                 @genre
             </label>
         }
@@ -34,9 +34,17 @@
         <h4>IMDB Rating</h4>
         <div>
             Between
-            <input name="IMDBMin" type="number" min="0" max="10" step="0.1" placeholder="min" />
+            <input name="IMDBMin" type="number" min="0" max="10" step="0.1" placeholder="min" value="@Model.IMDBMin" />
             and
-            <input name="IMDBMax" type="number" min="0" max="10" step="0.1" placeholder="min" />
+            <input name="IMDBMax" type="number" min="0" max="10" step="0.1" placeholder="min" value="@Model.IMDBMax" />
+        </div>
+
+        <h4>Rotten Tomatoes Rating</h4>
+        <div>
+            Between
+            <input name="TomatoesMin" type="number" min="0" max="10" step="0.1" placeholder="min" value="@Model.TomatoesMin" />
+            and
+            <input name="TomatoesMax" type="number" min="0" max="10" step="0.1" placeholder="min" value="@Model.TomatoesMax" />
         </div>
 
     </div>
@@ -71,5 +79,4 @@
             }
         </ul>
     </div>
-
-</form>
+</div>
